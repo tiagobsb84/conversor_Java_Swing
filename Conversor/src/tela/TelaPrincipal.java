@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
+import models.Fahrenheit;
 import models.Moeda;
 
 public class TelaPrincipal {
@@ -33,6 +34,7 @@ public class TelaPrincipal {
 		String mensagemOpcaoTemperatura = "Escolha uma opção";
 		Object[] array = {mensagemOpcaoTemperatura, opt1, opt2};
 		BigDecimal temperatura = new BigDecimal(0.0);	
+		Fahrenheit fahrenheit = new Fahrenheit();		
 		
 		Moeda moeda = new Moeda();
 		Integer escolha = 0;
@@ -132,6 +134,7 @@ public class TelaPrincipal {
 						}
 						try {
 							temperatura = BigDecimal.valueOf(Double.valueOf(inputValor));
+							break;
 						
 						} catch (NumberFormatException e) {
 							JOptionPane.showMessageDialog(null, "Insira um valor numérico", "Mensagem Valor Inválido!", 
