@@ -12,7 +12,7 @@ public class Fahrenheit {
 		return resultado.doubleValue();
 	}
 
-	public Double getFahrenheit(Double fahrenheit) {
+	public Double getFahrenheit() {
 		this.temperatura = fahrenheitParaCelsius(temperatura);
 		return temperatura;
 	}

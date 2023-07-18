@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
+import models.Celsius;
 import models.Fahrenheit;
 import models.Moeda;
 
@@ -24,6 +25,7 @@ public class TelaPrincipal {
 		ImageIcon iconConcluir = new ImageIcon("src/imagem/concluido.png");
 		ImageIcon iconOpcaoTemperatura = new ImageIcon("src/imagem/opcao_temperatura.jpg");
 		ImageIcon iconValorTemperatura = new ImageIcon("src/imagem/valor_temperatura.jpg");
+		ImageIcon iconResultadoTemperatura = new ImageIcon("src/imagem/resultado_temperatura.jpg");
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		JRadioButton opt1 = new javax.swing.JRadioButton("Celsius para Fahrenheit");
@@ -34,7 +36,8 @@ public class TelaPrincipal {
 		String mensagemOpcaoTemperatura = "Escolha uma opção";
 		Object[] array = {mensagemOpcaoTemperatura, opt1, opt2};
 		BigDecimal temperatura = new BigDecimal(0.0);	
-		Fahrenheit fahrenheit = new Fahrenheit();		
+		Fahrenheit fahrenheit = new Fahrenheit();	
+		Celsius celsius = new Celsius();
 		
 		Moeda moeda = new Moeda();
 		Integer escolha = 0;
@@ -122,7 +125,7 @@ public class TelaPrincipal {
 				break;
 				
 			case "Conversor de Temperatura":
-				int sel = JOptionPane.showConfirmDialog(null, array, "Opção da Conversão de Temperatura", JOptionPane.DEFAULT_OPTION,
+				int seleciona = JOptionPane.showConfirmDialog(null, array, "Opção da Conversão de Temperatura", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.QUESTION_MESSAGE, iconOpcaoTemperatura);
 				
 				try {
@@ -144,7 +147,25 @@ public class TelaPrincipal {
 				} catch(Exception e) {
 					return;
 				}
+				
+				if(seleciona == 0) {
+					if(opt1.isSelected()) {
+						celsius.setTemperatura(temperatura.doubleValue());
+						celsius.celsiusParaFahrenheit(temperatura.doubleValue());
+						JOptionPane.showMessageDialog(null, "A conversão de " + temperatura + "°C\n deu em " + celsius.getTemperatura() + " °F",
+								"Valor da Temperatura Convertida", JOptionPane.INFORMATION_MESSAGE, iconResultadoTemperatura);
+					
+					} else if(opt2.isSelected()) {
+						fahrenheit.setTemperatura(temperatura.doubleValue());
+						fahrenheit.fahrenheitParaCelsius(temperatura.doubleValue());
+						JOptionPane.showMessageDialog(null, "A conversão de " + temperatura + "°F\n deu em " + fahrenheit.getFahrenheit() + " °C",
+								"Valor da Temperatura Convertida", JOptionPane.INFORMATION_MESSAGE, iconResultadoTemperatura);
+					}
+				} 
+				
+				break;
 			} 
+
 			
 			//Validação se realmente o usuário deseja sair da aplicação ou continuar
 			opt1.setSelected(true);
