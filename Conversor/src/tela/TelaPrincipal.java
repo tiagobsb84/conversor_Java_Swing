@@ -15,6 +15,10 @@ public class TelaPrincipal {
 		ImageIcon iconAlura = new ImageIcon("src/imagem/A_do_alura.jpg");
 		ImageIcon iconValorInput = new ImageIcon("src/imagem/input_valor.jpg");
 		ImageIcon iconValorNumerio = new ImageIcon("src/imagem/valor_numerico.png");
+		ImageIcon iconOpcaoConversao = new ImageIcon("src/imagem/bolsa_dinheiro.png");
+		ImageIcon iconPergunta = new ImageIcon("src/imagem/pergunta.jpg");
+		ImageIcon iconFinalizar = new ImageIcon("src/imagem/finalizado.png");
+		ImageIcon iconConcluir = new ImageIcon("src/imagem/concluido.png");
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		JRadioButton opt1 = new javax.swing.JRadioButton();
@@ -23,7 +27,7 @@ public class TelaPrincipal {
 		
 		Moeda moeda = new Moeda();
 		Integer escolha = 0;
-		String inputValor = "", valor;
+		String inputValor = "";
 		Double valorCotacao = 0.0;
 		String[] menuOpcoes = {"Conversor de Moedas", "Conversor de Temperatura"};
 		String[] tipoMoedas = {"De Reais a Dólares", "De Reais a Euro", "De Reais a Libras", "De Reais a Peso Argentino", "De Reais a Peso Chileno",
@@ -43,14 +47,14 @@ public class TelaPrincipal {
 				try {
 					while(true) {
 						//Painel do valor do input
-						valor = (JOptionPane.showInputDialog(null, "Insira um valor", "Valor da conversão",
-								JOptionPane.QUESTION_MESSAGE));
-						if(valor == null) {
+						inputValor = (String) (JOptionPane.showInputDialog(null, "Insira um valor", "Valor da conversão",
+								JOptionPane.QUESTION_MESSAGE, iconValorInput, null, null));
+						if(inputValor == null) {
 							System.exit(0);
 						}
 						try {
 							//Convertendo para double
-							valorCotacao = Double.parseDouble(valor);
+							valorCotacao = Double.parseDouble(inputValor);
 							break;
 							
 						} catch(NumberFormatException e) {
@@ -69,7 +73,7 @@ public class TelaPrincipal {
 			switch(telaMenu) {
 			case "Conversor de Moedas":
 				String selecionaMoeda = (String) JOptionPane.showInputDialog(null, "Escolha a moeda que deseja converter", "Conversão de Moedas",
-						JOptionPane.PLAIN_MESSAGE, iconValorNumerio, tipoMoedas, tipoMoedas[0]);
+						JOptionPane.PLAIN_MESSAGE, iconOpcaoConversao, tipoMoedas, tipoMoedas[0]);
 				
 				if(selecionaMoeda == null) {
 					System.exit(0);
@@ -83,25 +87,45 @@ public class TelaPrincipal {
 					moeda.reaisParaEuro(valorCotacao);
 					break;
 				case "De Reais a Libras":
+					moeda.reaisParaLibra(valorCotacao);
+					break;
+				case "De Reais a Peso Argentino":
+					moeda.reaisParaPesoArgentino(valorCotacao);
+					break;
+				case "De Reais a Peso Chileno":
+					moeda.reaisParaPesoChileno(valorCotacao);
+					break;
+				case "De dólares a Reias":
+					moeda.dolarParaReais(valorCotacao);
+					break;
+				case "De Libras a Reais":
+					moeda.libraParaReais(valorCotacao);
+					break;
+				case "De Peso Argentino a Reais":
+					moeda.pesoArgentinoParaReais(valorCotacao);
+					break;
+				case "De Peso Chileno a Reais":
+					moeda.pesoChilenoParaReais(valorCotacao);
 					break;
 				}
+				break;
 			} 
 			
 			
 			//Validação se realmente o usuário deseja sair da aplicação ou continuar
 			opt1.setSelected(true);
 			escolha = JOptionPane.showConfirmDialog(null, "Deseja continuar?", "Pergunta ao Usuário",
-					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, iconPergunta);
 			
 		//Opção se vai sair da aplicação ou continuar.	
 		} while(escolha == 0);
 		if(escolha == 1) {
 			JOptionPane.showMessageDialog(null, "Programa finalizado", "Mensagem ao Usuário",
-					JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.INFORMATION_MESSAGE, iconFinalizar);
 		
 		} else if(escolha == 2) {
 			JOptionPane.showMessageDialog(null, "Programa concluido", "Mensagem ao Usuário",
-					JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.INFORMATION_MESSAGE, iconConcluir);
 		}
 	}		
 }
