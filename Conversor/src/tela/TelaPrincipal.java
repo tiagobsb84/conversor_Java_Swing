@@ -19,11 +19,16 @@ public class TelaPrincipal {
 		ImageIcon iconPergunta = new ImageIcon("src/imagem/pergunta.jpg");
 		ImageIcon iconFinalizar = new ImageIcon("src/imagem/finalizado.png");
 		ImageIcon iconConcluir = new ImageIcon("src/imagem/concluido.png");
+		ImageIcon iconOpcaoTemperatura = new ImageIcon("src/imagem/opcao_temperatura.jpg");
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
-		JRadioButton opt1 = new javax.swing.JRadioButton();
+		JRadioButton opt1 = new javax.swing.JRadioButton("Celsius para Fahrenheit");
+		JRadioButton opt2 = new javax.swing.JRadioButton("Fahrenheit para Celsius");
 		opt1.setSelected(true);
 		buttonGroup.add(opt1);
+		buttonGroup.add(opt2);
+		String mensagemOpcaoTemperatura = "Escolha uma opção";
+		Object[] array = {mensagemOpcaoTemperatura, opt1, opt2};
 		
 		Moeda moeda = new Moeda();
 		Integer escolha = 0;
@@ -109,8 +114,11 @@ public class TelaPrincipal {
 					break;
 				}
 				break;
+				
+			case "Conversor de Temperatura":
+				int sel = JOptionPane.showConfirmDialog(null, array, "Opção da Conversão de Temperatura", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.QUESTION_MESSAGE, iconOpcaoTemperatura);
 			} 
-			
 			
 			//Validação se realmente o usuário deseja sair da aplicação ou continuar
 			opt1.setSelected(true);
