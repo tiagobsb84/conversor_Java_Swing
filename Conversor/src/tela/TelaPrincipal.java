@@ -1,5 +1,7 @@
 package tela;
 
+import java.math.BigDecimal;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,6 +22,7 @@ public class TelaPrincipal {
 		ImageIcon iconFinalizar = new ImageIcon("src/imagem/finalizado.png");
 		ImageIcon iconConcluir = new ImageIcon("src/imagem/concluido.png");
 		ImageIcon iconOpcaoTemperatura = new ImageIcon("src/imagem/opcao_temperatura.jpg");
+		ImageIcon iconValorTemperatura = new ImageIcon("src/imagem/valor_temperatura.jpg");
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		JRadioButton opt1 = new javax.swing.JRadioButton("Celsius para Fahrenheit");
@@ -29,6 +32,7 @@ public class TelaPrincipal {
 		buttonGroup.add(opt2);
 		String mensagemOpcaoTemperatura = "Escolha uma opção";
 		Object[] array = {mensagemOpcaoTemperatura, opt1, opt2};
+		BigDecimal temperatura = new BigDecimal(0.0);	
 		
 		Moeda moeda = new Moeda();
 		Integer escolha = 0;
@@ -118,6 +122,25 @@ public class TelaPrincipal {
 			case "Conversor de Temperatura":
 				int sel = JOptionPane.showConfirmDialog(null, array, "Opção da Conversão de Temperatura", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.QUESTION_MESSAGE, iconOpcaoTemperatura);
+				
+				try {
+					while(true) {
+						inputValor = (String) (JOptionPane.showInputDialog(null, "Insira uma temperatura", "Valor da Temperatura", 
+								JOptionPane.QUESTION_MESSAGE, iconValorTemperatura, null, null));
+						if(inputValor == null) {
+							System.exit(0);
+						}
+						try {
+							temperatura = BigDecimal.valueOf(Double.valueOf(inputValor));
+						
+						} catch (NumberFormatException e) {
+							JOptionPane.showMessageDialog(null, "Insira um valor numérico", "Mensagem Valor Inválido!", 
+									JOptionPane.INFORMATION_MESSAGE, iconValorNumerio);
+						}
+					}
+				} catch(Exception e) {
+					return;
+				}
 			} 
 			
 			//Validação se realmente o usuário deseja sair da aplicação ou continuar
